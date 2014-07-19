@@ -5,7 +5,7 @@
  */
 
 #include <stdio.h>
-#include <string.h>
+#include <bsd/string.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -76,22 +76,18 @@ int b10to22(int n ) {
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
 	char tmp[siz]; tmp[0] = '1';
-//	printf("%i, %i\n", d, j);
 	for (i = 1; i < siz; i++) { tmp[i] = '0'; }
 
 	for (i = 1; n > 1; i++) {
 		n -= d*0.5;
-		if (n == 0) { printf("%s\n", tmp); break; }
+		if (n == 0) break;
 		for (j = 0, d = 0; d <= n; j++) d = pow(2, j);
-		printf("%i, %i\n", d, j);
-		printf("%i\n", n);
 		tmp[siz - j + 1] = '1';
 	}
-	printf("%s\n", tmp);
-	return 0;
+	return atoi(tmp);
 }
 
-int main(void) {
+int main(int argc, char **argv) {
     // base 2 to 10
     // char binary[1024];
     // printf("Enter a binary value to convert: ");
@@ -109,7 +105,8 @@ int main(void) {
 	printf("(%s)2 = %d\n", binary, b2to10(binary, strlen(binary)));
 	strlcpy(binary, "65", sizeof(binary));
 	printf("(%s)8 = %d\n", binary, b8to10(binary, strlen(binary)));
-	printf("%d\n", b10to2(20));
-	b10to22(13);
+	int a = atoi(argv[1]);
+	printf("%d\n", b10to2(a));
+	printf("%i\n", b10to22(a));
 	return 0;
 }
