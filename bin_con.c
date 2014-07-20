@@ -40,12 +40,12 @@ int b10to2(int n ) {
 
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
-	char *tmp;
-	if ( NULL == (tmp = malloc(siz*sizeof(char))) ) {
-	  printf("malloc failed\n");
+	char *tmp = calloc(siz, sizeof(char));
+	if ( NULL == tmp) {
+	  printf("calloc failed\n");
 	  return -1;
 	}
-	for (i = 1; i < siz; i++) tmp[i] = '0'; tmp[0] = '1';
+	tmp[0] = '1';
 
 	for (i = 1; n > 1; i++) {
 		n -= d*0.5;
@@ -54,6 +54,7 @@ int b10to2(int n ) {
 		tmp[siz - j + 1] = '1';
 	}
 	return atoi(tmp);
+	free(tmp);
 }
 
 int main(int argc, char **argv) {
