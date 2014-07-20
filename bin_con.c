@@ -5,13 +5,9 @@
  */
 
 #include <stdio.h>
-#include <bsd/string.h>
+#include <string.h>
 #include <stdlib.h>
 #include <math.h>
-
-//int b2to10(char *, size_t);
-//int b8to10(char *, size_t);
-//int b10to2(int);
 
 int b2to10(char *bin, size_t siz) {
 	int i, j;
@@ -24,7 +20,7 @@ int b2to10(char *bin, size_t siz) {
 	return sum;
 }
 
-int b8to10(char * oct, size_t siz) {
+int b8to10(char *oct, size_t siz) {
 	int i, j;
 	int sum = 0;
 
@@ -46,7 +42,7 @@ int b10to2(int n ) {
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
 	char tmp[siz]; tmp[0] = '1';
-	for (i = 1; i < siz; i++) { tmp[i] = '0'; }
+	for (i = 1; i < siz; i++) tmp[i] = '0';
 
 	/* dirtier */
 	for (i = 1; n > 1; i++) {
