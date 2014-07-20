@@ -1,0 +1,48 @@
+#:kivy 1.8.0
+
+<TitleBar>:
+	size_hint_y: 0.08
+	canvas:
+		Color:
+			rgba: 0, 0, 0, 1
+		Rectangle:
+			size: root.width, root.height
+			pos: self.x, root.top - self.height
+
+	Prompt:
+		size: self.width, root.height
+		halign: 'right'
+		center_x: 0 + self.texture_size[0]/3 + root.width/20
+		center_y: root.top - self.height/2
+		color: 0, 1, 0.1, 1
+
+	Label:
+		text: "Rice Keep"
+		font_size: '18sp'
+		color: 0, 1, 0.1, 1
+		size: root.width, root.height
+		center_x: root.width/2
+		center_y: root.top - self.height/2
+
+
+<SwitchScreen>:
+	AccordionThing:
+		size_hint_x: 0.3
+
+	ButtonBar:
+		size_hint_y: 0.08
+		canvas:
+			Color:
+				rgba: 0, 0, 0, 1
+			Rectangle:
+				size: root.width, root.height
+				pos: self.x, self.y
+			
+		Button:
+			text: "button 1"
+
+		Button:
+			text: "button 1"
+
+		Button:
+			text: "button 1"
