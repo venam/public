@@ -42,11 +42,13 @@ int b10to2(int n ) {
 
 	if (n == 0) { return 0; }
 
+	/* dirty */
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
 	char tmp[siz]; tmp[0] = '1';
 	for (i = 1; i < siz; i++) { tmp[i] = '0'; }
 
+	/* dirtier */
 	for (i = 1; n > 1; i++) {
 		n -= d*0.5;
 		if (n == 0) break;
