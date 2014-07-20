@@ -36,15 +36,17 @@ int b10to2(int n ) {
 	int d;
 	int siz;
 
-	if (n == 0) { return 0; }
+	if (n == 0) return 0;
 
-	/* dirty */
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
-	char tmp[siz]; tmp[0] = '1';
-	for (i = 1; i < siz; i++) tmp[i] = '0';
+	char *tmp;
+	if ( NULL == (tmp = malloc(siz*sizeof(char))) ) {
+	  printf("malloc failed\n");
+	  return -1;
+	}
+	for (i = 1; i < siz; i++) tmp[i] = '0'; tmp[0] = '1';
 
-	/* dirtier */
 	for (i = 1; n > 1; i++) {
 		n -= d*0.5;
 		if (n == 0) break;
@@ -55,11 +57,11 @@ int b10to2(int n ) {
 }
 
 int main(int argc, char **argv) {
-	if (argc != 3) { printf("We be broke"); return 1; }
+	if (argc != 3) { printf("We be broke\n"); return 1; }
 
-	int num = atoi(argv[2]);
 	char *str = argv[2];
 	int lng = strlen(str);
+	int num = atoi(argv[argc - 1]);
 
 	switch ( atoi(argv[1]) ) {
 		case 2:  
