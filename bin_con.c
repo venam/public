@@ -42,8 +42,8 @@ int b10to2(int n ) {
 	siz = j - 1;
 	char *tmp = calloc(siz, sizeof(char));
 	if ( NULL == tmp) {
-	  printf("calloc failed\n");
-	  return -1;
+		printf("calloc failed\n");
+		return -1;
 	}
 	tmp[0] = '1';
 
