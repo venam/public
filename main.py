@@ -13,8 +13,11 @@ from getpass import getuser
 from socket import gethostname
 
 
-class TitleBar(Widget):
-    pass
+class TitleBar(BoxLayout):
+
+    def __init__(self, **kwargs):
+        super(TitleBar, self).__init__(**kwargs)
+        self.orientation = 'vertical'
 
 
 class Prompt(Label):
@@ -28,7 +31,7 @@ class SwitchScreen(BoxLayout):
 
     def __init__(self, **kwargs):
         super(SwitchScreen, self).__init__(**kwargs)
-        self.orientation = 'horizontal'
+        self.orientation = 'vertical'
 
 
 class AccordionThing(Accordion):
@@ -48,14 +51,20 @@ class ButtonBar(BoxLayout):
         self.orientation = 'horizontal'
 
 
+class Splitter(Widget):
+    pass
+
+
 class MainScreen(BoxLayout):
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = 'horizontal'
         titleb = TitleBar()
         switch = SwitchScreen()
+        splitr = Splitter()
         self.add_widget(titleb)
+        self.add_widget(splitr)
         self.add_widget(switch)
 
 
@@ -63,7 +72,7 @@ class RiceApp(App):
 
     def build(self):
         win = MainScreen()
-        Window.clearcolor = (0.2, 0.2, 0.2, 1)
+        Window.clearcolor = (0.15, 0.15, 0.15, 1)
         return win
 
 
