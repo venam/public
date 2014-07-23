@@ -40,9 +40,9 @@ int b10to2(int n ) {
 
 	for (j = 1, d = 0; d <= n; j++) d = pow(2, j);
 	siz = j - 1;
-	char *tmp = calloc(siz, sizeof(char));
-	if ( NULL == tmp) {
-		printf("calloc failed\n");
+	char *tmp;
+	if ( NULL == (tmp = malloc(siz*sizeof(char))) ) {
+		printf("malloc failed\n");
 		return -1;
 	}
 	tmp[0] = '1';
