@@ -45,7 +45,7 @@ int b10to2(int n ) {
 		printf("malloc failed\n");
 		return -1;
 	}
-	tmp[0] = '1';
+	for (i = 0; i < siz; i++) tmp[i] = '0'; tmp[0] = '1';
 
 	for (i = 1; n > 1; i++) {
 		n -= d*0.5;
