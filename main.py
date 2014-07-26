@@ -18,7 +18,7 @@ class TitleBar(BoxLayout):
 
     def __init__(self, **kwargs):
         super(TitleBar, self).__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = 'horizontal'
 
 
 class Prompt(Label):
@@ -32,7 +32,7 @@ class SwitchScreen(BoxLayout):
 
     def __init__(self, **kwargs):
         super(SwitchScreen, self).__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = 'horizontal'
 
 
 class AccordionThing(Accordion):
@@ -42,13 +42,10 @@ class AccordionThing(Accordion):
         self.orientation = 'vertical'
         inst = JsonInfoReader.JsonInfoReader("info.json", None)
         cats = inst.listCategories()
-#        print(cats)
         for cat in cats:
-#            print(cat)
             item = AccordionItem(title='%s' % cat)
             box = BoxLayout(orientation = 'vertical')
             subs = inst.listInsideCategories(cat)
-            print(subs)
             for sub in subs:
                 box.add_widget(Label(text="%s" % sub))
             item.add_widget(box)
@@ -69,12 +66,10 @@ class MainScreen(BoxLayout):
 
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        self.orientation = 'horizontal'
+        self.orientation = 'vertical'
         titleb = TitleBar()
         switch = SwitchScreen()
-        splitr = Splitter()
         self.add_widget(titleb)
-        self.add_widget(splitr)
         self.add_widget(switch)
 
 

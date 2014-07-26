@@ -1,32 +1,31 @@
 #:kivy 1.8.0
 
 <TitleBar>:
-	size_hint_x: 0.3
+	size_hint_y: 0.05
 	canvas:
 		Color:
 			rgba: 0.35, 0.35, 0.35, 1
 		Rectangle:
-			size: root.width, root.height*0.05
-			pos: self.x, root.height*95/100
+#			size: root.width, root.height*0.05
+#			pos: self.x, root.height*95/100
+			size: self.size
+			pos: self.pos
 
 	Prompt:
-		size_hint_y: 0.05
+		size_hint_x: 0.3
 		size: self.width, root.height
 		halign: 'right'
 		center_x: root.center_x
 		center_y: root.height - self.texture_size[1]
 #		color: 0, 1, 0.1, 1
 
-	AccordionThing:
+	Label:
+#		size_hint_x: 0.05
+		text: "Rice Keep"
+		font_size: '18sp'
+#		color: 0, 1, 0.1, 1
+		size: self.width, self.height
 
-<Splitter>:
-	size_hint_x: 0.01
-	canvas:
-		Color:
-			rgba: 0.35, 0.35, 0.35, 1
-		Rectangle:
-			size: self.size
-			pos: self.pos
 
 <Bbar@Button>:
 	text: "I'm a button!"
@@ -35,55 +34,36 @@
 
 <SwitchScreen>:
 #	size_hint_y: 0.08
+
 	canvas:
 		Color:
-			rgba: 0.35, 0.35, 0.35, 1
+			rgba: 0.15, 0.15, 0.15, 1
 		Rectangle:
 			size: root.width, root.height
 			pos: self.x, root.top - self.height
 
-	Label:
-		size_hint_y: 0.05
-		text: "Rice Keep"
-		font_size: '18sp'
-#		color: 0, 1, 0.1, 1
-		size: self.width, self.height
+	AccordionThing:
+		size_hint_x: 0.3
 
 	Widget:
-		size_hint_y: 0.9
-		size: root.width, root.height*0.902
+		size_hint_x: 0.01
 		canvas:
 			Color:
-				rgb: 0.15, 0.15, 0.15
+				rgba: 0.35, 0.35, 0.35, 1
 			Rectangle:
 				size: self.size
 				pos: self.pos
-		CheckBox:
-			size: self.size
-			pos: root.x, root.top - self.height*1.5
-		Label:
-			size: self.size
-			pos: root.x + self.texture_size[0]/1.5, root.top - self.height*1.5
-			text: "We be precedent now"
-		CheckBox:
-			size: self.size
-			pos: root.x, root.top - self.height*2
-		Label:
-			size: self.size
-			pos: root.x + self.texture_size[0]/1.5, root.top - self.height*2
-			text: "We be going sleep now"
 
-	ButtonBar:
-		size_hint_y: 0.05
-#		canvas:
-#			Color:
-#				rgba: 0, 0, 0, 1
-#			Rectangle:
-#				size: root.width, root.height
-#				pos: self.x, self.y
-			
-		Bbar:
+	BoxLayout:
+		orientation: "vertical"
 
-		Bbar:
+		Widget:
 
-		Bbar:
+		ButtonBar:
+			size_hint_y: 0.05
+				
+			Bbar:
+
+			Bbar:
+
+			Bbar:
