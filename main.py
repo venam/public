@@ -44,7 +44,7 @@ class SwitchScreen(BoxLayout):
         
 
     def create(self):
-        self.accordion.bind(selected=self.view_callback)
+        self.accordion.bind(selected=self.viewitem)
 
 
 class AccordionThing(Accordion):
