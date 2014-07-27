@@ -5,6 +5,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.stacklayout import StackLayout
 from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
@@ -32,19 +33,39 @@ class Prompt(Label):
 
 
 class SwitchScreen(BoxLayout):
+    global file
+    inst = file
     accordion = ObjectProperty(None)
+    scrollinfo = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super(SwitchScreen, self).__init__(**kwargs)
         self.orientation = 'horizontal'
         self.create()
+        self.scrollinfo.add_widget(InfoScreen(self.inst.listCategories()[0]))
 
     def viewitem(self, object, value):
-        print(value)
-        
+        self.scrollinfo.clear_widgets()
+        self.scrollinfo.add_widget(InfoScreen(value))
 
     def create(self):
         self.accordion.bind(selected=self.viewitem)
+
+
+class InfoScreen(StackLayout):
+
+    def __init__(self, value, **kwargs):
+        super(InfoScreen, self).__init__(**kwargs)
+        self.orientation = 'tb-lr'
+        global file
+        inst = file
+
+        self.add_widget(Label(text = value, font_size = "28sp",
+            size_hint_y = 0.05))
+        for sub in inst.listInsideCategories(value):
+            l = (Label(text = sub, halign="left", size_hint=(None, 0.05)))
+            l.bind(texture_size=l.setter('size'))
+            self.add_widget(l)
 
 
 class AccordionThing(Accordion):
@@ -65,12 +86,12 @@ class AccordionThing(Accordion):
         inst = file
         blades = []
         for cat in inst.listCategories():
-            blades.append(AccordionItem(title='%s' % cat))
+            blades.append(AccordionItem(title = cat))
             blades[-1].bind(collapse=self.switch)
             box = BoxLayout(orientation = 'vertical')
             subs = inst.listInsideCategories(cat)
             for sub in subs:
-                box.add_widget(Label(text="%s" % sub))
+                box.add_widget(Label(text = sub))
             blades[-1].add_widget(box)
             self.add_widget(blades[-1])
         blades[-1].collapse = True

@@ -29,6 +29,7 @@
 <SwitchScreen>:
 #	size_hint_y: 0.08
 	accordion: acco
+	scrollinfo: info
 
 	canvas:
 		Color:
@@ -52,10 +53,11 @@
 				pos: self.pos
 
 	BoxLayout:
-#		id: 
 		orientation: "vertical"
+#		on_: viewitem()
 
-		Widget:
+		ScrollView:
+			id: info
 
 		ButtonBar:
 			size_hint_y: 0.05
