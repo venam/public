@@ -42,7 +42,7 @@ class SwitchScreen(BoxLayout):
         super(SwitchScreen, self).__init__(**kwargs)
         self.orientation = 'horizontal'
         self.create()
-        self.scrollinfo.add_widget(InfoScreen(self.inst.listCategories()[0]))
+#        self.scrollinfo.add_widget(InfoScreen(self.inst.listCategories()[0]))
 
     def viewitem(self, object, value):
         self.scrollinfo.clear_widgets()
@@ -52,20 +52,27 @@ class SwitchScreen(BoxLayout):
         self.accordion.bind(selected=self.viewitem)
 
 
-class InfoScreen(StackLayout):
+class InfoScreen(BoxLayout):
 
     def __init__(self, value, **kwargs):
         super(InfoScreen, self).__init__(**kwargs)
-        self.orientation = 'tb-lr'
+        self.orientation = 'vertical'
         global file
         inst = file
+#        self.padding = [0.9, 0.2]
 
-        self.add_widget(Label(text = value, font_size = "28sp",
-            size_hint_y = 0.05))
-        for sub in inst.listInsideCategories(value):
-            l = (Label(text = sub, halign="left", size_hint=(None, 0.05)))
-            l.bind(texture_size=l.setter('size'))
-            self.add_widget(l)
+        self.add_widget(Label(text = value, font_size = "28sp"))
+#        for sub in inst.listInsideCategories(value):
+#            l = (Label(text = sub)) #, halign="center", size_hint=(None, None)))
+#            l.bind(texture_size=l.setter('size'))
+#            self.add_widget(l)
+
+        wid = Widget(size_hint_y = 0.9)
+        inf = inst.getInfo(value)
+        l2= (Label(text = inf, halign="center")) #, size_hint=(None, 0.05)))
+#        l2.bind(texture_size=l.setter('size'))
+        wid.add_widget(l2)
+        self.add_widget(wid)
 
 
 class AccordionThing(Accordion):
@@ -76,9 +83,8 @@ class AccordionThing(Accordion):
         self.orientation = 'vertical'
         self.draw()
 
-    def switch(self, object, boolean):
-        if not boolean:
-            self.selected = object.title
+    def switch(self, object):
+        self.selected = object.text
 #            print(self.selected)
 
     def draw(self):
@@ -87,11 +93,13 @@ class AccordionThing(Accordion):
         blades = []
         for cat in inst.listCategories():
             blades.append(AccordionItem(title = cat))
-            blades[-1].bind(collapse=self.switch)
+#            blades[-1].bind(collapse = self.switch)
             box = BoxLayout(orientation = 'vertical')
             subs = inst.listInsideCategories(cat)
             for sub in subs:
-                box.add_widget(Label(text = sub))
+                butt = Button(text = sub, background_color = [0.35, 0.35, 0.35, 1])
+                butt.bind(on_press = self.switch)
+                box.add_widget(butt)
             blades[-1].add_widget(box)
             self.add_widget(blades[-1])
         blades[-1].collapse = True
