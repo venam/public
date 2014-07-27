@@ -7,6 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.accordion import Accordion, AccordionItem
+from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
 from kivy.properties import StringProperty, ObjectProperty
@@ -68,8 +69,10 @@ class InfoScreen(StackLayout):
 #            self.add_widget(l)
 
         inf = inst.getInfo(value)
-        l2= (Label(text = inf, size_hint = (None, 0.1), haligh = 'center'))
-        l2.bind(texture_size=l2.setter('size'))
+#        l2= (Label(text = inf, size_hint = (None, 0.1), halign = 'left',
+#            size_y = text_size[1]))
+#        l2.bind(texture_size=l2.setter('size'))
+        l2 = TextInput(text = inf, background_color = (0.15, 0.15, 0.15, 1), size_hint_y = 0.9, foreground_color = (1, 1, 1, 1))
         self.add_widget(l2)
 
 
