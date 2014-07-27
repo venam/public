@@ -15,6 +15,8 @@ import JsonInfoReader, State, Outputer
 import time
 
 
+file = JsonInfoReader.JsonInfoReader("info.json", None)
+
 class TitleBar(BoxLayout):
 
     def __init__(self, **kwargs):
@@ -37,8 +39,9 @@ class SwitchScreen(BoxLayout):
         self.orientation = 'horizontal'
         self.create()
 
-    def view_callback(self, object, value):
+    def viewitem(self, object, value):
         print(value)
+        
 
     def create(self):
         self.accordion.bind(selected=self.view_callback)
@@ -52,22 +55,26 @@ class AccordionThing(Accordion):
         self.orientation = 'vertical'
         self.draw()
 
-    def my_callback(self, object, boolean):
+    def switch(self, object, boolean):
         if not boolean:
             self.selected = object.title
 #            print(self.selected)
 
     def draw(self):
-        inst = JsonInfoReader.JsonInfoReader("info.json", None)
+        global file
+        inst = file
+        blades = []
         for cat in inst.listCategories():
-            item = AccordionItem(title='%s' % cat)
-            item.bind(collapse=self.my_callback)
+            blades.append(AccordionItem(title='%s' % cat))
+            blades[-1].bind(collapse=self.switch)
             box = BoxLayout(orientation = 'vertical')
             subs = inst.listInsideCategories(cat)
             for sub in subs:
                 box.add_widget(Label(text="%s" % sub))
-            item.add_widget(box)
-            self.add_widget(item)
+            blades[-1].add_widget(box)
+            self.add_widget(blades[-1])
+        blades[-1].collapse = True
+        blades[0].collapse = False
 
 
 class ButtonBar(BoxLayout):
