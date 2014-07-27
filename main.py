@@ -52,27 +52,25 @@ class SwitchScreen(BoxLayout):
         self.accordion.bind(selected=self.viewitem)
 
 
-class InfoScreen(BoxLayout):
+class InfoScreen(StackLayout):
 
     def __init__(self, value, **kwargs):
         super(InfoScreen, self).__init__(**kwargs)
-        self.orientation = 'vertical'
+        self.orientation = 'tb-lr'
         global file
         inst = file
 #        self.padding = [0.9, 0.2]
 
-        self.add_widget(Label(text = value, font_size = "28sp"))
+        self.add_widget(Label(text = value, font_size = "28sp", size_hint_y = 0.1))
 #        for sub in inst.listInsideCategories(value):
 #            l = (Label(text = sub)) #, halign="center", size_hint=(None, None)))
 #            l.bind(texture_size=l.setter('size'))
 #            self.add_widget(l)
 
-        wid = Widget(size_hint_y = 0.9)
         inf = inst.getInfo(value)
-        l2= (Label(text = inf, halign="center")) #, size_hint=(None, 0.05)))
-#        l2.bind(texture_size=l.setter('size'))
-        wid.add_widget(l2)
-        self.add_widget(wid)
+        l2= (Label(text = inf, size_hint = (None, 0.1), haligh = 'center'))
+        l2.bind(texture_size=l2.setter('size'))
+        self.add_widget(l2)
 
 
 class AccordionThing(Accordion):
