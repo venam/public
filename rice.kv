@@ -6,8 +6,6 @@
 		Color:
 			rgba: 0.35, 0.35, 0.35, 1
 		Rectangle:
-#			size: root.width, root.height*0.05
-#			pos: self.x, root.height*95/100
 			size: self.size
 			pos: self.pos
 
@@ -17,23 +15,20 @@
 		halign: 'right'
 		center_x: root.center_x
 		center_y: root.height - self.texture_size[1]
-#		color: 0, 1, 0.1, 1
 
 	Label:
 #		size_hint_x: 0.05
 		text: "Rice Keep"
 		font_size: '18sp'
-#		color: 0, 1, 0.1, 1
 		size: self.width, self.height
 
 
 <Bbar@Button>:
 	text: "I'm a button!"
-#	color: 0, 1, 0.2, 1
-#	background_color: 0, 0, 0, 1
 
 <SwitchScreen>:
 #	size_hint_y: 0.08
+#	accordion: acco
 
 	canvas:
 		Color:
@@ -43,6 +38,8 @@
 			pos: self.x, root.top - self.height
 
 	AccordionThing:
+#		id: acco
+		
 		size_hint_x: 0.3
 
 	Widget:

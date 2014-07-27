@@ -8,10 +8,11 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.core.window import Window
 from kivy.graphics import Color, Rectangle
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ObjectProperty
 from getpass import getuser
 from socket import gethostname
 import JsonInfoReader, State, Outputer
+import time
 
 
 class TitleBar(BoxLayout):
@@ -29,21 +30,37 @@ class Prompt(Label):
 
 
 class SwitchScreen(BoxLayout):
+#    accordion = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super(SwitchScreen, self).__init__(**kwargs)
         self.orientation = 'horizontal'
 
+    def sel_call(self, object, value):
+        print(value)
+
+#    def create(self):
+#        self.accordion.bind(on_selected=viewswitch)
+
 
 class AccordionThing(Accordion):
+    selected = ""
 
     def __init__(self, **kwargs):
         super(AccordionThing, self).__init__(**kwargs)
         self.orientation = 'vertical'
+        self.draw()
+
+    def my_callback(self, object, boolean):
+        if not boolean:
+            self.selected = object.title
+            print(self.selected)
+
+    def draw(self):
         inst = JsonInfoReader.JsonInfoReader("info.json", None)
-        cats = inst.listCategories()
-        for cat in cats:
+        for cat in inst.listCategories():
             item = AccordionItem(title='%s' % cat)
+            item.bind(collapse=self.my_callback)
             box = BoxLayout(orientation = 'vertical')
             subs = inst.listInsideCategories(cat)
             for sub in subs:
@@ -51,15 +68,12 @@ class AccordionThing(Accordion):
             item.add_widget(box)
             self.add_widget(item)
 
+
 class ButtonBar(BoxLayout):
 
     def __init__(self, **kwargs):
         super(ButtonBar, self).__init__(**kwargs)
         self.orientation = 'horizontal'
-
-
-class Splitter(Widget):
-    pass
 
 
 class MainScreen(BoxLayout):
