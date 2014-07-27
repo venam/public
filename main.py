@@ -30,21 +30,22 @@ class Prompt(Label):
 
 
 class SwitchScreen(BoxLayout):
-#    accordion = ObjectProperty(None)
+    accordion = ObjectProperty(None)
 
     def __init__(self, **kwargs):
         super(SwitchScreen, self).__init__(**kwargs)
         self.orientation = 'horizontal'
+        self.create()
 
-    def sel_call(self, object, value):
+    def view_callback(self, object, value):
         print(value)
 
-#    def create(self):
-#        self.accordion.bind(on_selected=viewswitch)
+    def create(self):
+        self.accordion.bind(selected=self.view_callback)
 
 
 class AccordionThing(Accordion):
-    selected = ""
+    selected = StringProperty("")
 
     def __init__(self, **kwargs):
         super(AccordionThing, self).__init__(**kwargs)
@@ -54,7 +55,7 @@ class AccordionThing(Accordion):
     def my_callback(self, object, boolean):
         if not boolean:
             self.selected = object.title
-            print(self.selected)
+#            print(self.selected)
 
     def draw(self):
         inst = JsonInfoReader.JsonInfoReader("info.json", None)
