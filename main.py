@@ -65,7 +65,7 @@ class InfoScreen(StackLayout):
         inst = file
 #        self.padding = [0.9, 0.2]
         box  = BoxLayout(orientation = 'vertical')
-        box2 = BoxLayout(orientation = 'horizontal', size_hint_y=0.1,padding=20) 
+        box2 = BoxLayout(orientation = 'horizontal', size_hint_y=0.15,padding=20) 
 
         box2.add_widget(Label(text = value, font_size = "28sp", size_hint_x = 0.8))
         box2.add_widget(CheckBox(size_hint_x=0.2))
