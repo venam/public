@@ -6,6 +6,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.checkbox import CheckBox
+from kivy.uix.scrollview import ScrollView
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.accordion import Accordion, AccordionItem
 from kivy.uix.textinput import TextInput
@@ -18,7 +19,7 @@ import JsonInfoReader, State, Outputer
 import time
 
 
-file = JsonInfoReader.JsonInfoReader("info.json", None)
+file = JsonInfoReader.JsonInfoReader("info.json",None)
 state = State.State()
 
 class TitleBar(BoxLayout):
@@ -66,9 +67,8 @@ class InfoScreen(StackLayout):
         box  = BoxLayout(orientation = 'vertical')
         box2 = BoxLayout(orientation = 'horizontal', size_hint_y=0.1,padding=20) 
 
-        box2.add_widget(Label(text = value, font_size = "28sp", size_hint_x = 0.9))
-        box2.add_widget(CheckBox(size_hint_x=0.1))
-        box.add_widget(box2)
+        box2.add_widget(Label(text = value, font_size = "28sp", size_hint_x = 0.8))
+        box2.add_widget(CheckBox(size_hint_x=0.2))
 #        for sub in inst.listInsideCategories(value):
 #            l = (Label(text = sub)) #, halign="center", size_hint=(None, None)))
 #            l.bind(texture_size=l.setter('size'))
@@ -78,7 +78,8 @@ class InfoScreen(StackLayout):
 #        l2= (Label(text = inf, size_hint = (None, 0.1), halign = 'left',
 #            size_y = text_size[1]))
 #        l2.bind(texture_size=l2.setter('size'))
-        l2 = TextInput(text = inf, background_color = (0.15, 0.15, 0.15, 1), size_hint_y = 0.9, foreground_color = (1, 1, 1, 1))
+        l2 = TextInput(text = inf, background_color = (0.15, 0.15, 0.15, 1), size_hint=(1.0, None), foreground_color = (1, 1, 1, 1))
+        l2.bind(minimum_height=l2.setter('height'))
         l2.readonly = True
         #l2.font_name = "Monospace"
         l2.multiline = True
@@ -87,7 +88,10 @@ class InfoScreen(StackLayout):
             l3.text = state.comments[value]
         l3.multiline = True
         l3.font_name = "DroidSans"
-        box.add_widget(l2)
+        root = ScrollView(size_hint=(None, None), size=(600, 400))
+        root.add_widget(l2)
+        box.add_widget(box2)
+        box.add_widget(root)
         box.add_widget(l3)
         self.add_widget(box)
 
